@@ -1,13 +1,17 @@
 spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+
   kafka:
     properties:
       sasl:
         jaas:
-          config: org.apache.kafka.common.security.scram.ScramLoginModule required username="dtbyikgm" password="bjtXsvyLnbws5sdHqoBPo-JNyzBo_P0x";
+          config: org.apache.kafka.common.security.scram.ScramLoginModule required username="${CLOUDKARAFKA_USERNAME}" password="${CLOUDKARAFKA_PASSWORD}";
         mechanism: SCRAM-SHA-256
       security:
         protocol: SASL_SSL
-    bootstrap-servers: velomobile-02.srvs.cloudkafka.com:9094,velomobile-01.srvs.cloudkafka.com:9094,velomobile-03.srvs.cloudkafka.com:9094
+    bootstrap-servers: ${CLOUDKARAFKA_BROKERS}
     consumer:
       group-id: simian-checker
       auto-offset-reset: earliest
