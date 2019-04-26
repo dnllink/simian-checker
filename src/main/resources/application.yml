@@ -1,1 +1,7 @@
-
+spring:
+  kafka:
+    consumer:
+      group-id: simian-checker
+      auto-offset-reset: earliest
+    dna-sample:
+      topic: dna-samples

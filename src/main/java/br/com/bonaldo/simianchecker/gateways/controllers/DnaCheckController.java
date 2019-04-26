@@ -1,7 +1,7 @@
 package br.com.bonaldo.simianchecker.gateways.controllers;
 
 import br.com.bonaldo.simianchecker.domains.DnaSample;
-import br.com.bonaldo.simianchecker.gateways.DnaSampleGateway;
+import br.com.bonaldo.simianchecker.gateways.DnaSampleEventGateway;
 import br.com.bonaldo.simianchecker.gateways.adapters.DnaSampleAdapter;
 import br.com.bonaldo.simianchecker.gateways.controllers.jsons.DnaSampleRequest;
 
@@ -26,6 +26,7 @@ public class DnaCheckController {
 
     private final DnaSampleAdapter dnaSampleAdapter;
     private final CheckForSimianDna checkForSimianDna;
+    private final DnaSampleEventGateway dnaSampleEventGateway;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity checkDna(@RequestBody final DnaSampleRequest dnaSampleRequest) throws InvalidConversionException {
@@ -37,6 +38,8 @@ public class DnaCheckController {
 
         final boolean isSimian = checkForSimianDna.execute(dnaSample);
         dnaSample.setSimian(isSimian);
+
+        dnaSampleEventGateway.send(dnaSample);
 
         if (isSimian)
             responseEntity = ResponseEntity.ok().build();
