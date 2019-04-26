@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -Dspring.data.mongodb.uri=$MONGODB_URI -Dspring.kafka.consumer.bootstrap-servers=$CLOUDKARAFKA_BROKERS -jar target/simian-checker-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -Dspring.profiles.active=heroku -Dspring.data.mongodb.uri=$MONGODB_URI -Dspring.kafka.consumer.bootstrap-servers=$CLOUDKARAFKA_BROKERS -jar target/simian-checker-0.0.1-SNAPSHOT.jar
