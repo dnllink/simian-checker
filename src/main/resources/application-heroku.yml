@@ -12,4 +12,4 @@ spring:
       group-id: simian-checker
       auto-offset-reset: earliest
     dna-sample:
-      topic: ${CLOUDKARAFKA_TOPIC_PREFIX}-dna-samples
+      topic: ${CLOUDKARAFKA_TOPIC_PREFIX}dna-samples
