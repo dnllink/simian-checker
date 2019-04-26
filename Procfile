@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/encurtador-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -jar target/simian-checker-0.0.1-SNAPSHOT.jar
