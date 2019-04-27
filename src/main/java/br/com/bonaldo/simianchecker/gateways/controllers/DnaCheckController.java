@@ -31,7 +31,7 @@ public class DnaCheckController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity checkDna(@RequestBody final DnaSampleRequest dnaSampleRequest) throws InvalidConversionException {
 
-        log.info("Received a dna sample");
+        log.info("Received request for dna check");
         final ResponseEntity responseEntity;
 
         final DnaSample dnaSample = dnaSampleAdapter.parse(dnaSampleRequest);

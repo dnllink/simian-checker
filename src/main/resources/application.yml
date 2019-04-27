@@ -5,3 +5,6 @@ spring:
       auto-offset-reset: earliest
     dna-sample:
       topic: dna-samples
+
+  redis:
+    url: redis://:@localhost:6379

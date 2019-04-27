@@ -17,3 +17,9 @@ spring:
       auto-offset-reset: earliest
     dna-sample:
       topic: ${CLOUDKARAFKA_TOPIC_PREFIX}dna-samples
+
+  redis:
+    url: ${REDIS_URL}
+  cache:
+    redis:
+      time-to-live: 60000

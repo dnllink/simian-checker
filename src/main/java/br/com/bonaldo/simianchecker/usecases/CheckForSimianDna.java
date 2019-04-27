@@ -2,6 +2,7 @@ package br.com.bonaldo.simianchecker.usecases;
 
 import br.com.bonaldo.simianchecker.domains.DnaSample;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -11,7 +12,10 @@ public class CheckForSimianDna {
     private static final int[] CLOSE_ROWS = new int[]{-1, -1, -1, 0, 0, 1, 1, 1};
     private static final int[] CLOSE_COLS = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
 
+    @Cacheable("samples")
     public boolean execute(final DnaSample dnaSample) {
+
+        log.info("Checking dna! No cache!");
 
         final String[][] dnaMatrix = dnaSample.getCells();
         final int matrixSize = dnaMatrix.length;
