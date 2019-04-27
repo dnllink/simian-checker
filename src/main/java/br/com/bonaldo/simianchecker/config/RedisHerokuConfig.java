@@ -25,7 +25,7 @@ public class RedisHerokuConfig {
 
         final RedisStandaloneConfiguration redisStandaloneConfiguration
                 = new RedisStandaloneConfiguration(uri.getHost(), uri.getPort());
-        redisStandaloneConfiguration.setPassword(RedisPassword.of(uri.getAuthority().split(":")[1]));
+        redisStandaloneConfiguration.setPassword(RedisPassword.of(uri.getUserInfo().split(":")[1]));
 
         return new JedisConnectionFactory(redisStandaloneConfiguration);
     }
