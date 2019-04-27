@@ -15,7 +15,7 @@ public class CheckForSimianDna {
     @Cacheable("samples")
     public boolean execute(final DnaSample dnaSample) {
 
-        log.info("Checking dna! No cache!");
+        log.debug("Checking the sample: {}", dnaSample);
 
         final String[][] dnaMatrix = dnaSample.getCells();
         final int matrixSize = dnaMatrix.length;
@@ -24,15 +24,15 @@ public class CheckForSimianDna {
 
         int simianSequenceCounter = 0;
 
-        for (int row = 0; row < matrixSize; ++row) {
-            for (int col = 0; col < matrixSize; ++col) {
-                if (searchForSequenceOnCloseCells(dnaMatrix, row, col, foundSequences)) {//TODO parar de procurar se achar 2
+        for (int row = 0; row < matrixSize && simianSequenceCounter < 2; ++row) {
+            for (int col = 0; col < matrixSize && simianSequenceCounter < 2; ++col) {
+                if (searchForSequenceOnCloseCells(dnaMatrix, row, col, foundSequences)) {
                     simianSequenceCounter++;
                 }
             }
         }
 
-        log.info("Found {} sequences on dna sample", simianSequenceCounter);
+        log.debug("Found at least {} sequences on dna sample {}", simianSequenceCounter, dnaSample);
 
         return simianSequenceCounter > 1;
     }

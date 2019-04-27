@@ -1,16 +1,21 @@
 package br.com.bonaldo.simianchecker.gateways.adapters;
 
 import br.com.bonaldo.simianchecker.domains.DnaSample;
+import br.com.bonaldo.simianchecker.domains.Nucleobases;
 import br.com.bonaldo.simianchecker.gateways.controllers.jsons.DnaSampleRequest;
 import br.com.bonaldo.simianchecker.gateways.exceptions.InvalidConversionException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.List;
 
 @Slf4j
 @Component
 public class DnaSampleAdapter implements Adapter<DnaSampleRequest, DnaSample> {
 
     private static final String INVALID_DNA_SAMPLE_MESSAGE = "dna.validation.invalid.sample";
+    private static final String INVALID_DNA_SAMPLE_BASE_MESSAGE = "dna.validation.invalid.base";
 
     @Override
     public DnaSample parse(DnaSampleRequest dnaSampleRequest) throws InvalidConversionException {
@@ -19,19 +24,20 @@ public class DnaSampleAdapter implements Adapter<DnaSampleRequest, DnaSample> {
         final String[] rawMatrix = dnaSampleRequest.getDna();
         final String[][] dnaMatrix = new String[matrixSize][matrixSize];
 
-        try {
-            for (int line = 0; line < matrixSize; line++) {
-                for (int col = 0; col < matrixSize; col++) {
-                    checkValidLine(matrixSize, rawMatrix[line].length());
-                    fromStringToArray(rawMatrix[line], dnaMatrix, line, col);
-                }
+        for (int line = 0; line < matrixSize; line++) {
+            checkValidLine(matrixSize, rawMatrix[line].length());
+            for (int col = 0; col < matrixSize; col++) {
+                fromStringToArray(rawMatrix[line], dnaMatrix, line, col);
+                validateAcceptedLetter(dnaMatrix[line][col]);
             }
-        } catch (StringIndexOutOfBoundsException siobe) {
-            log.error(siobe.getMessage());
-            throw new InvalidConversionException(INVALID_DNA_SAMPLE_MESSAGE);
         }
 
         return new DnaSample(dnaMatrix);
+    }
+
+    private void validateAcceptedLetter(final String letter) throws InvalidConversionException {
+        if(Nucleobases.isInvalidBase(letter))
+            throw new InvalidConversionException(INVALID_DNA_SAMPLE_BASE_MESSAGE);
     }
 
     private void checkValidLine(final int matrixSize, final int lineSize) throws InvalidConversionException {
