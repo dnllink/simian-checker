@@ -7,9 +7,6 @@ import br.com.bonaldo.simianchecker.gateways.exceptions.InvalidConversionExcepti
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-import java.util.List;
-
 @Slf4j
 @Component
 public class DnaSampleAdapter implements Adapter<DnaSampleRequest, DnaSample> {
@@ -18,7 +15,7 @@ public class DnaSampleAdapter implements Adapter<DnaSampleRequest, DnaSample> {
     private static final String INVALID_DNA_SAMPLE_BASE_MESSAGE = "dna.validation.invalid.base";
 
     @Override
-    public DnaSample parse(DnaSampleRequest dnaSampleRequest) throws InvalidConversionException {
+    public DnaSample parse(final DnaSampleRequest dnaSampleRequest) throws InvalidConversionException {
 
         final int matrixSize = dnaSampleRequest.getSampleSize();
         final String[] rawMatrix = dnaSampleRequest.getDna();

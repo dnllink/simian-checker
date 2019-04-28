@@ -17,6 +17,8 @@ import java.util.List;
 public class DnaSampleMongoGateway implements DnaSampleGateway {
 
     private static final String COLLECTION_NAME = "samples";
+    private static final String IS_SIMIAN = "isSimian";
+    private static final String TOTAL = "total";
 
     private final DnaSampleRepository repository;
     private final MongoOperations mongoOperations;
@@ -29,7 +31,7 @@ public class DnaSampleMongoGateway implements DnaSampleGateway {
     @Override
     public List<DnaStats> getStatistics() {
 
-        final GroupOperation group = Aggregation.group("isSimian").count().as("total");
+        final GroupOperation group = Aggregation.group(IS_SIMIAN).count().as(TOTAL);
 
         final Aggregation aggregation =  Aggregation.newAggregation(group);
 

@@ -26,7 +26,7 @@ public class CustomExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(InvalidConversionException.class)
     public ErrorResource handleInvalidConversionException(final HttpServletRequest request, final InvalidConversionException exception) {
-        log.error("Convertion failed: {}", exception.getMessage());
+        log.error("Conversion failed: {}", exception.getMessage());
         return new ErrorResource(Collections.singletonList(getErrorMessage(exception.getMessage())));
     }
 

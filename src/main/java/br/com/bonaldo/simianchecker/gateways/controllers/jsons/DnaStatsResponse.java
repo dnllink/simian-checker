@@ -3,10 +3,12 @@ package br.com.bonaldo.simianchecker.gateways.controllers.jsons;
 import br.com.bonaldo.simianchecker.domains.DnaStats;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class DnaStatsResponse {
 
     @JsonProperty("count_mutant_dna")

@@ -4,8 +4,6 @@ import br.com.bonaldo.simianchecker.domains.DnaSample;
 import br.com.bonaldo.simianchecker.gateways.DnaSampleEventGateway;
 import br.com.bonaldo.simianchecker.gateways.adapters.DnaSampleAdapter;
 import br.com.bonaldo.simianchecker.gateways.controllers.jsons.DnaSampleRequest;
-
-
 import br.com.bonaldo.simianchecker.gateways.exceptions.InvalidConversionException;
 import br.com.bonaldo.simianchecker.usecases.CheckForSimianDna;
 import lombok.RequiredArgsConstructor;
