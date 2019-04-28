@@ -7,7 +7,7 @@ As amostras seguem o seguinte padrão:
 
 ![Amostra](dna_sample.png)
 
-As amostras são analisadas contando a quantidade de sequências horizontais, verticais ou diagonais da mesma base (A, C, T e G).
+As amostras são analisadas contando a quantidade de sequências de 4 bases iguais(A, C, T e G), sejam horizontais, verticais ou diagonais.
 
 Caso haja **mais de 1 sequência**, a amostra pertence a um símio, caso contrário é humana.
 
